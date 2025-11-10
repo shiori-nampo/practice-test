@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 class AuthorController extends Controller
 {
 
+    public function index()
+    {
+        $authors = Author::all();
+        return view('index',['authors' => $authors]);
+    }
+
     public function add()
     {
         return view('add');
@@ -20,10 +26,31 @@ class AuthorController extends Controller
         return redirect('/');
     }
 
-     public function index()
+    public function edit(Request $request)
     {
-        $authors = Author::all();
-        return view('index',['authors' => $authors]);
+        $author = Author::find($request->id);
+        return view('edit',['form' => $author]);
+    }
+
+    public function update(Request $request)
+    {
+        $form = $request->all();
+        unset($form['_token']); //laravelから自動で送られてくるCSRFトークンを削除している
+        Author::find($request->id)->update($form);
+        // 該当する作者データを更新する
+        return redirect('/');
+    }
+
+    public function delete(Request $request)
+    {
+        $author = Author::find($request->id);
+        return view('delete',['author' => $author]);
+    }
+
+    public function remove(Request $request)
+    {
+        Author::find($request->id)->delete();
+        return redirect('/');
     }
 
 }
