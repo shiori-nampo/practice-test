@@ -14,6 +14,7 @@ td {
     text-align: center;
 }
 
+
 svg.w-5.h-5 {
     /*paginateメソッドの矢印の大きさ調整のために追加*/
     width: 30px;
@@ -26,6 +27,7 @@ svg.w-5.h-5 {
 @section('content')
 <table>
 <tr>
+<<<<<<< HEAD
     <th>Data</th>
 </tr>
 @foreach ($authors as $author)
@@ -35,4 +37,20 @@ svg.w-5.h-5 {
 @endforeach
 </table>
 {{ $authors->links() }}
+=======
+    <th>id</th>
+    <th>name</th>
+    <th>age</th>
+    <th>nationality</th>
+</tr>
+@foreach ($authors as $author)
+<tr>
+    <td>{{$author->id}}</td>
+    <td>{{$author->name}}</td>
+    <td>{{$author->age}}</td>
+    <td>{{$author->nationality}}</td>
+</tr>
+@endforeach
+</table>
+>>>>>>> aa9678d (Add author data-retrieval)
 @endsection
