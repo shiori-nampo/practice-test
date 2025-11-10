@@ -1,0 +1,9 @@
+# DockerのMySQLデータを無視
+docker/mysql/data/
+
+# OSやエディタの設定ファイル
+.DS_Store
+
+# IDE関連（VSCodeなど）
+.vscode/
+.idea/
