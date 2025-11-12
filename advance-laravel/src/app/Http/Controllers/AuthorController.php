@@ -53,6 +53,14 @@ class AuthorController extends Controller
         return redirect('/');
     }
 
+    public function relate()//relate（リレー、関係付ける）
+    {
+        $hasItems = Author::has('book')->get();
+        $noItems = Author::doesntHave('book')->get();
+        $param = ['hasItems' => $hasItems, 'noItems' => $noItems];
+        return view('author.index',$param);
+    }
+
 }
 
 
