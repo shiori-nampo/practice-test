@@ -23,10 +23,19 @@ th {
 @section('title', 'edit.blade.php')
 
 @section('content')
+@if (count($errors) > 0)
+<p>入力に問題があります</p>
+@endif
 <form action="/edit" method="POST">
 <table>
     @csrf
+@if ($errors->has('id'))
     <tr>
+        <th style="background-color: red">ERROR</th>
+        <td>{{$errors->first('id')}}</td>
+</tr>
+@endif
+<tr>
     <th>
         id
     </th>
@@ -34,6 +43,12 @@ th {
         <input type="text" name="id" value="{{$form->id}}">
     </td>
     </tr>
+    @if ($errors->has('name'))
+    <tr>
+        <th style="background-color:red">ERROR</th>
+        <td>{{$errors->first('name')}}</td>
+</tr>
+@endif
     <tr>
     <th>
         name
@@ -42,6 +57,12 @@ th {
         <input type="text" name="name" value="{{$form->name}}">
     </td>
     </tr>
+    @if ($errors->has('age'))
+    <tr>
+        <th style="background-color:red">ERROR</th>
+        <td>{{$errors->first('age')}}</td>
+</tr>
+@endif
     <tr>
     <th>
         age
@@ -50,6 +71,12 @@ th {
         <input type="text" name="age" value="{{$form->age}}">
     </td>
     </tr>
+@if ($errors->has('nationality'))
+<tr>
+    <th style="background-color:red">ERROR</th>
+    <td>{{$errors->first('nationality')}}</td>
+</tr>
+@endif
     <tr>
     <th>
         nationality

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use Illuminate\Http\Request;
+use App\Http\Requests\AuthorRequest;
 
 class AuthorController extends Controller
 {
@@ -19,7 +20,7 @@ class AuthorController extends Controller
         return view('add');
     }
 
-    public function create(Request $request)
+    public function create(AuthorRequest $request)
     {
         $form = $request->all();
         Author::create($form);
@@ -32,7 +33,7 @@ class AuthorController extends Controller
         return view('edit',['form' => $author]);
     }
 
-    public function update(Request $request)
+    public function update(AuthorRequest $request)
     {
         $form = $request->all();
         unset($form['_token']); //laravelから自動で送られてくるCSRFトークンを削除している
@@ -44,6 +45,9 @@ class AuthorController extends Controller
     public function delete(Request $request)
     {
         $author = Author::find($request->id);
+        if(!$author) {
+            return redirect('/')->with('message','著者が見つかりませんでした。');
+        }
         return view('delete',['author' => $author]);
     }
 
@@ -51,6 +55,33 @@ class AuthorController extends Controller
     {
         Author::find($request->id)->delete();
         return redirect('/');
+    }
+
+    public function find()
+    {
+        return view('find',['input' => '']);
+    }
+    public function search(Request $request)
+    {
+        $item = Author::where('name','LIKE',"%{$request->input}%")->first();
+        $param = [
+            'input' => $request->input,
+            'item' => $item
+        ];
+        return view('find',$param);
+    }
+
+    public function bind(Author $author)
+    { //bind＝結びつける
+        $data = [
+            'item' => $author,
+        ];
+        return view('author.binds',$data);
+    }
+
+    public function verror()
+    {
+        return view('verror');
     }
 
 }

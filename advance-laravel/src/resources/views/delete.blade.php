@@ -45,6 +45,7 @@ button {
     <td>
         <form action="/delete?id={{$author->id}}" method="POST">
             @csrf
+            <input type="hidden" name="id" value="{{ $author->id}}">
             <button>送信</button>
         </form>
     </td>
