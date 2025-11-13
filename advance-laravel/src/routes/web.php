@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\SessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,6 @@ Route::prefix('book')->group(function () {
 });
 
 Route::get('/relation',[AuthorController::class,'relate']);
+
+Route::get('/session',[SessionController::class,'getSes']);
+Route::post('/session',[SessionController::class,'postSes']);
