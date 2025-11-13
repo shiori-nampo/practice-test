@@ -7,8 +7,8 @@ use App\Models\Book;
 
 class BookController extends Controller
 {
-    public function index(){
-        $items = Book::all();
+    public function index(Request $equest){
+        $items = Book::with('authors')->get();
         return view('book.index',['items'=>$items]);
     }
 

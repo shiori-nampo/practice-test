@@ -19,4 +19,6 @@ class Author extends Model
     {
         return 'ID'.$this->id.':'.$this->name.'('.$this->age.'才)';
     }
+
+   
 }
